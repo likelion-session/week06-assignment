@@ -20,20 +20,27 @@
 
 ---
 
-## 📁 제출 폴더 규칙
+## 📁 제출 폴더 규칙 — **한 프로젝트만** 제출
+
+이번 과제는 **백엔드·프론트를 따로 두지 않고**, 5주차 Spring Boot 프로젝트 **하나** 안에서 모두 완료·제출합니다.
 
 ```
 submissions/
 └── {본인GitHub아이디}/
-    ├── README.md              # 이름, 실행 방법, 구현 기능, 스크린샷 설명
-    ├── backend/               # 5주차 Spring Boot + CorsConfig.java
-    ├── frontend/              # React 프로젝트 (node_modules 제외)
-    └── screenshots/           # (선택) Network 탭·화면 캡처
+    ├── README.md                 # 이름, 실행 방법(아래 단일 프로젝트 기준), 스크린샷
+    └── todo-app/                 # 프로젝트 폴더명은 자유 (예: todo-fullstack)
+        ├── pom.xml               # Spring Boot (5주차 그대로 + CorsConfig)
+        ├── src/                  # Java 소스
+        ├── frontend/             # 이 안에 create-react-app (React + Axios)
+        │   ├── package.json
+        │   └── src/
+        └── screenshots/          # (선택) Network·화면 캡처
 ```
 
-- 폴더명은 **반드시 본인 GitHub 사용자명**과 동일하게 합니다.  
-- `backend`는 5주차 Todo API 프로젝트 전체를 넣거나, **CORS 설정이 들어간 최소 파일** + README에 “5주차 프로젝트 경로”를 적어도 됩니다.  
-- `frontend`에는 `package.json`, `src/` 등이 포함되어야 하며 **`node_modules/`는 커밋하지 않습니다.**
+- 폴더명 `{본인GitHub아이디}`는 **반드시 GitHub 사용자명**과 동일합니다.  
+- **`submissions/아이디/backend/` + `frontend/` 처럼 나눠 제출하지 마세요.** 반드시 위처럼 **루트 1개 + 그 안의 `frontend/`** 구조입니다.  
+- 5주차 프로젝트를 복사한 뒤, **같은 폴더 트리**에 `frontend/`만 추가하면 됩니다.  
+- **`frontend/node_modules/`** 는 커밋하지 않습니다.
 
 ---
 

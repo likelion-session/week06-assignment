@@ -12,19 +12,43 @@
 
 ### 과제 통과 최소선
 
-1. 백엔드에 **CORS** 설정 (`http://localhost:3000` 허용)  
-2. React에서 **목록 조회(GET)** + **추가(POST)**  
-3. **삭제(DELETE)** 또는 **완료 토글(PATCH)** 중 **하나 이상**  
-4. 로딩/에러 문구가 화면에 보임  
-5. README에 실행 방법 + Network 탭 캡처 설명  
+1. **한 프로젝트** 안에서 CORS + React + API 연동 완료  
+2. 백엔드에 **CORS** 설정 (`http://localhost:3000` 허용)  
+3. React에서 **목록 조회(GET)** + **추가(POST)**  
+4. **삭제(DELETE)** 또는 **완료 토글(PATCH)** 중 **하나 이상**  
+5. 로딩/에러 문구 + README(실행 방법) + Network 캡처  
 
-토글 API가 없는 5주차 프로젝트라면 **삭제만** 구현해도 3번은 충족됩니다.
+토글 API가 없는 5주차 프로젝트라면 **삭제만** 구현해도 4번은 충족됩니다.
 
 ---
 
-## 0. 사전 준비 — 백엔드 API
+## ⚠️ 반드시 한 프로젝트에서 작업하기
 
-5주차에서 만든 **Spring Boot Todo API**가 로컬에서 동작해야 합니다.
+- **5주차 Spring Boot 프로젝트 = 이번 과제의 유일한 루트**입니다.  
+- React는 **별도 저장소·별도 상위 폴더**가 아니라, 그 프로젝트 **안**에 `frontend/` 폴더를 만들어 넣습니다.  
+- 제출도 `submissions/본인아이디/todo-app/` **폴더 하나**만 올립니다 (`backend/`와 `frontend/`를 형제 폴더로 나누지 않음).
+
+### 권장 폴더 구조 (로컬·제출 동일)
+
+```
+todo-app/                    ← 5주차 프로젝트 복사본 (이름은 자유)
+├── pom.xml
+├── mvnw
+├── src/main/java/...        ← CorsConfig.java 추가
+├── src/main/resources/
+└── frontend/                ← 여기서 create-react-app
+    ├── package.json
+    └── src/
+        ├── api/axios.js
+        ├── App.js
+        └── hooks/useTodos.js   (선택)
+```
+
+---
+
+## 0. 사전 준비 — 한 프로젝트로 시작
+
+5주차 **Spring Boot Todo API** 프로젝트를 폴더 하나 정한 뒤(예: `todo-app`), **이 폴더만** 6주차 작업 공간으로 씁니다.
 
 | 기능 | Method | URL |
 |------|--------|-----|
@@ -36,7 +60,7 @@
 ### 체크포인트 A — 백엔드 단독 확인
 
 ```bash
-cd {5주차_프로젝트_폴더}
+cd todo-app          # 본인 5주차 프로젝트 루트 (한 프로젝트의 최상위)
 ./mvnw spring-boot:run
 ```
 
@@ -68,7 +92,7 @@ npm -v     # 10.x 등
 |------|------------|-----------|
 | 1 | 백엔드 실행 | Postman `GET /api/todos` 성공 |
 | 2 | CORS 설정 추가 | React 출처 `http://localhost:3000` 허용 |
-| 3 | React 프로젝트 생성 | `npm start`로 화면 열림 |
+| 3 | 같은 프로젝트 안 `frontend/` 생성 | `npm start`로 화면 열림 |
 | 4 | Axios 설치 | `package.json`에 `axios` 존재 |
 | 5 | `src/api/axios.js` 작성 | `baseURL`이 `http://localhost:8080/api` |
 | 6 | `App.js`에 목록 조회 | 새로고침 시 GET 요청 |
@@ -127,18 +151,25 @@ public class CorsConfig {
 
 > Vite 등으로 프론트가 `http://localhost:5173`이면 `allowedOrigins`에 해당 주소도 추가하세요.
 
-### 1-2. React 프로젝트 생성
+### 1-2. React — **같은 프로젝트 안** `frontend/` 생성
+
+Spring Boot 프로젝트 **루트**에서 실행합니다. (`todo-front` 같은 **형제 폴더**로 만들지 마세요.)
 
 ```bash
-npx create-react-app todo-front
-cd todo-front
+cd todo-app
+npx create-react-app frontend
+cd frontend
 npm install axios
 npm start
 ```
 
 브라우저에 `http://localhost:3000` 이 열리면 **체크포인트 B** 통과.
 
-### 1-3. `src/api/axios.js`
+> 터미널은 **2개** 씁니다.  
+> - 터미널 1: `todo-app`에서 `./mvnw spring-boot:run` (8080)  
+> - 터미널 2: `todo-app/frontend`에서 `npm start` (3000)
+
+### 1-3. `frontend/src/api/axios.js`
 
 ```javascript
 import axios from 'axios';
@@ -156,9 +187,9 @@ export default api;
 
 ### 1단계 제출물
 
-- `backend/.../CorsConfig.java` (또는 전체 백엔드 프로젝트)  
+- 단일 프로젝트 루트의 `src/.../CorsConfig.java`  
 - `frontend/src/api/axios.js`  
-- README에 실행 명령
+- `submissions/아이디/todo-app/README.md`에 **한 프로젝트 기준** 실행 명령
 
 ### 실패하면 먼저 볼 것
 
@@ -284,7 +315,7 @@ await fetchTodos();
 
 ## 4단계: 커스텀 훅 분리 (선택, 보너스)
 
-API 로직을 `src/hooks/useTodos.js`로 옮깁니다.
+API 로직을 `frontend/src/hooks/useTodos.js`로 옮깁니다.
 
 - `fetchTodos`, `createTodo`, `deleteTodo`, `toggleTodo` (구현한 것만)  
 - `loading`, `error` 반환  
@@ -325,13 +356,17 @@ api.interceptors.response.use(
 
 ---
 
-## README에 꼭 적을 내용 (`submissions/아이디/README.md`)
+## README에 꼭 적을 내용
+
+`submissions/아이디/README.md` 또는 `submissions/아이디/todo-app/README.md`에 **아래 한 프로젝트 기준**으로 적습니다.
 
 ```bash
-# 백엔드 (backend 폴더 또는 5주차 프로젝트 경로)
+# 터미널 1 — 프로젝트 루트 (Spring Boot)
+cd todo-app
 ./mvnw spring-boot:run
 
-# 프론트엔드 (frontend 폴더)
+# 터미널 2 — 같은 프로젝트의 frontend/
+cd todo-app/frontend
 npm install
 npm start
 ```
@@ -369,7 +404,8 @@ npm start
 
 ## 제출 주의
 
-- `node_modules/` 커밋 금지  
+- **한 프로젝트 폴더만** 제출 (`backend/`·`frontend/`를 submissions 직하위에 나누지 않음)  
+- `frontend/node_modules/` 커밋 금지  
 - DB 비밀번호·`.env` 커밋 금지  
 - 스크린샷은 **실제 동작 화면**이어야 함  
 - PR 제목: `[6주차] 이름 (GitHub: 아이디)`
