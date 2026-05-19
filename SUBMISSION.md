@@ -19,9 +19,8 @@ git checkout -b week06/본인GitHub아이디
 - **다른 사람 폴더는 수정하지 않습니다.**
 
 ```bash
-# 5주차 Spring Boot 프로젝트를 복사해 한 폴더로 제출 (이름 예: todo-app)
-mkdir -p submissions/본인GitHub아이디/todo-app
-# todo-app/ 루트 = Spring Boot, todo-app/frontend/ = React
+mkdir -p submissions/본인GitHub아이디/backend submissions/본인GitHub아이디/frontend
+# backend/ = 5주차 Spring Boot, frontend/ = React
 # 코드 작성 후
 git add submissions/본인GitHub아이디
 git commit -m "feat: 6주차 과제 제출 (본인이름)"

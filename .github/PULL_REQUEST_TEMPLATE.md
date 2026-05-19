@@ -5,8 +5,8 @@
 - GitHub 아이디: (submissions 폴더명과 동일해야 합니다)
 
 ### 제출 체크리스트
-- [ ] `submissions/{GitHub아이디}/` 아래 **단일 프로젝트 폴더** 1개 (Spring Boot 루트 + `frontend/` 하위)
-- [ ] 백엔드·프론트를 **별도 top-level 폴더로 나누지 않음**
+- [ ] `submissions/{GitHub아이디}/backend/` — Spring Boot
+- [ ] `submissions/{GitHub아이디}/frontend/` — React
 - [ ] `README.md`에 백엔드·프론트 실행 명령, 포트(8080/3000) 기재
 - [ ] 목록 조회·추가 동작 (필수)
 - [ ] 삭제 또는 완료 토글 중 하나 이상 (필수)
