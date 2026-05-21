@@ -1,0 +1,51 @@
+package com.likelion.todoapi;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+public class TodoService {
+
+    private final TodoRepository todoRepository;
+
+    public TodoService(TodoRepository todoRepository) {
+        this.todoRepository = todoRepository;
+    }
+
+        public List<Todo> getAll() {
+        return todoRepository.findAll();
+    }
+
+    public Todo get(Long id) {
+        return todoRepository.findById(id).orElseThrow();
+    }
+
+    @Transactional
+    public Todo create(String title, String description) {
+        Todo todo = new Todo(title, description);
+        return todoRepository.save(todo);
+    }
+
+    @Transactional
+    public Todo toggleCompleted(Long id) {
+        Todo todo = todoRepository.findById(id).orElseThrow();
+        todo.setCompleted(!todo.isCompleted());
+        return todo;
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        todoRepository.deleteById(id);
+    }
+
+    public List<Todo> getByCompleted(boolean completed) {
+        return todoRepository.findByCompleted(completed);
+    }
+
+    public List<Todo> searchByTitle(String keyword) {
+        return todoRepository.findByTitleContainingIgnoreCase(keyword);
+    }
+
+}
