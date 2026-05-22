@@ -1,0 +1,142 @@
+.app {
+  min-height: 100vh;
+  background: #f4f7fb;
+  color: #172033;
+  display: flex;
+  justify-content: center;
+  padding: 64px 20px;
+}
+
+.todo-panel {
+  width: min(100%, 680px);
+  background: #ffffff;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  box-shadow: 0 16px 40px rgba(23, 32, 51, 0.08);
+  padding: 32px;
+}
+
+.todo-header {
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  color: #2d6cdf;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+h1 {
+  font-size: 36px;
+  margin: 0;
+}
+
+.description {
+  color: #667085;
+  margin: 10px 0 0;
+}
+
+.todo-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.todo-form input {
+  flex: 1;
+  border: 1px solid #c7d2e1;
+  border-radius: 6px;
+  font-size: 16px;
+  padding: 12px 14px;
+}
+
+.todo-form button {
+  border: 0;
+  border-radius: 6px;
+  background: #172033;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 0 20px;
+}
+
+.status {
+  color: #516071;
+  margin: 12px 0;
+}
+
+.status.error {
+  color: #c81e4a;
+  font-weight: 700;
+}
+
+.todo-list {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+}
+
+.todo-item {
+  align-items: center;
+  border-top: 1px solid #edf1f7;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 48px;
+  padding: 12px 0;
+}
+
+.todo-content {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  min-width: 0;
+}
+
+.todo-content span {
+  overflow-wrap: anywhere;
+}
+
+.todo-content span.completed {
+  color: #667085;
+  text-decoration: line-through;
+}
+
+.todo-item strong {
+  background: #dff5ea;
+  border-radius: 999px;
+  color: #117a45;
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+.todo-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.todo-actions button {
+  background: #ffffff;
+  border: 1px solid #c7d2e1;
+  border-radius: 6px;
+  color: #172033;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 10px;
+}
+
+.todo-actions button.danger {
+  border-color: #f0b7c3;
+  color: #c81e4a;
+}
+
+.empty {
+  border-top: 1px solid #edf1f7;
+  color: #667085;
+  margin: 18px 0 0;
+  padding-top: 18px;
+}
